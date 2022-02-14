@@ -1,0 +1,53 @@
+import random
+from datetime import date 
+
+alunos_presentes= ['Eduardo','Vinicius','Marjori','Gabriel','Arthur','Mateus','Alan','Lucas','Fernando','Mariane','Leonardo','Luiz','Mileni']
+Presentes = []
+Nao_presentes = []
+date_atual = date.today()
+print('Ola Professor Lucas! Vamos começar com a chamada de hoje'.center(100,'='))
+print('\n')
+print('Aqui esta a lista de alunos'.center(60,'='))
+print('-'*60)
+for i in range(len(alunos_presentes)):
+    print(alunos_presentes[i].center(60,' '))
+    print('-'*60)
+print('='*60)
+print('\n')
+for a in range(len(alunos_presentes)):
+    choice = random.choice(alunos_presentes)
+    chamada = str(input(f'O aluno {choice} está presente?: [S/N]')).upper()
+    print('='*10)
+    if chamada == 'N':
+        Nao_presentes.append(choice)
+        alunos_presentes.remove(choice)
+    elif chamada =='S':
+        Presentes.append(choice)
+        alunos_presentes.remove(choice)
+print('\n')
+print('='*60)
+print(f'LISTA DE CHAMADA {date_atual.day}/{date_atual.month}/{date_atual.year}'.center(60,'='))
+print('='*60)
+print('ALUNOS PRESENTES (+) E FALTANTES (-)')
+print('='*60)
+for p in range(len(Presentes )):
+    print(Presentes[p],'+')
+    print('-'*60)
+for f in range(len(Nao_presentes)):
+    print(Nao_presentes[f],'-')
+    print('-'*60)
+print('='*60)
+print('\n')
+print('OK CHAMADA FEITA VAMOS PARA AS QUESTOES'.center(60,'='))
+print('='*60)
+while True:
+    choice_2 = random.choice(Presentes)
+    q = int(input('Qual questao o professor deseja resposta?:'))
+    print('='*50,'\n')
+    next = str(input(f'O aluno escolhido para responder a questão {q} foi {choice_2} \nGostaria de passar para proxima questão professor?: [S/N]')).upper()
+    print('='*60)
+    Presentes.remove(choice_2)
+    if next == 'N':
+        print('OK as questões foram respondidas')
+        break
+print('='*50,'\n')
