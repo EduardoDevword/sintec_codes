@@ -1,0 +1,64 @@
+cardapio = {'COQUINHA':4 , 'PASTEL': 6,'BRIGADEIRO': 2}
+conta=[]
+quant=[]
+compra=[]
+print('CARDAPIO'.center(26,'*'))
+print('-'*26)
+print('{:20} {}'.format('ITENS','PREÇO'))
+for x,y in cardapio.items():
+    print('*{:20} R${},00'.format(x, y))
+print('-'*26)
+
+while True:
+    try:
+        pedido = str(input('Digite o que você deseja:')).upper()
+        if pedido in cardapio:
+            conta.append(pedido)
+        else:
+            while pedido in cardapio:
+                print('PRODUTO INDISPINIVEL')
+                print('-'*26)
+                pedido = str(input('Digite o que você deseja:')).upper()
+                if pedido in cardapio:
+                    conta.append(pedido)
+        print('-'*26)
+        quantidade = int(input('Digite a quantidade do produto:'))
+        quant.append(quantidade)
+        print('-'*26)
+        pagar = cardapio[pedido] * quantidade
+        compra.append(pagar)
+        total = sum(compra)
+        novo_pedido =str(input('Deseja mais alguma coisa de nossa cardapio?: [S/N]')).upper()
+        print('-'*26)
+        while novo_pedido not in 'SN':
+            print('-'*26)
+            print('OPÇÃO INVALIDA')
+            print('-'*26)
+            novo_pedido =str(input('Deseja mais alguma coisa de nossa cardapio?: [S/N]')).upper()
+            if novo_pedido == 'N':
+                break
+            print('-'*26)
+        if novo_pedido == 'N':
+            break
+    except KeyError:
+        print('-'*26)
+        print('PRODUTO INDISPINIVEL')
+        print('-'*26)
+    except ValueError:
+        print('-'*26)
+        print('OPÇÃO INDISPONIVEL')
+        print('-'*26)
+    except IndexError:
+        print('-'*26)
+        print('ALGO DEU ERRADO NA SUA COMPRA TENTE NOVAMENTE ADICIONAR SEU ULTIMO ITEM')
+        print('-'*26)
+
+print('-'*56)
+print('NOTA DE COMPRA'.center(50,'*'))
+print('-'*56)
+print('{:20} {:20} {}'.format('ITENS','QUANTIDADE','VALOR'))
+for i in range(len(conta)):
+    print('>{:20} X{} R${:20},00'.format(conta[i],quant[i],compra[i]))
+print('-'*56)
+print(f'TOTAL : R${total}'.center(56))
+print('-'*56)
